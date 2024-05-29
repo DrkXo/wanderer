@@ -2,7 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wanderer/src/common/provider/audio_handler/audio_handler.dart';
 
-import '../../model/playlist_model.dart';
+import '../../model/playlist_state_model.dart';
 
 part 'audio_controller.g.dart';
 

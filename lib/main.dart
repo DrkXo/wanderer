@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wanderer/src/wanderer.dart';
 
 import 'src/common/provider/audio_handler/audio_handler.dart';
+import 'src/utils/provider_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,9 @@ void main() async {
 
   runApp(
     ProviderScope(
+      observers: [
+        WandererProviderObserver(),
+      ],
       overrides: [
         audioHandlerProvider.overrideWithValue(audioHandler),
       ],

@@ -23,9 +23,7 @@ class PlayerMinimizedView extends ConsumerWidget {
       return const SizedBox.shrink();
     } else {
       return Animate(
-        effects: const [
-          FlipEffect(),
-        ],
+        effects: const [SlideEffect()],
         child: GestureDetector(
           /*  onTap: () => Navigator.push(context,
           MaterialPageRoute(builder: (context) => const QueuePlayerScreen())), */

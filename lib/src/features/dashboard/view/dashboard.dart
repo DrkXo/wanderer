@@ -1,10 +1,8 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wanderer/src/common/provider/audio_controller/audio_controller.dart';
 
-import '../../player/view/player_view.dart';
+import '../../player/view/player_minimized_view.dart';
 
 class Dashboard extends ConsumerWidget {
   const Dashboard({
@@ -20,30 +18,6 @@ class Dashboard extends ConsumerWidget {
       appBar: AppBar(),
       body: navigationShell,
       bottomSheet: const PlayerMinimizedView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          const item = MediaItem(
-            id: 'song',
-            title: 'Sample 1',
-            extras: {
-              'path':
-                  'https://onlinetestcase.com/wp-content/uploads/2023/06/10-MB-MP3.mp3',
-            },
-          );
-
-          const item1 = MediaItem(
-            id: 'song1',
-            title: 'Sample 2',
-            extras: {
-              'path': 'https://download.samplelib.com/mp3/sample-3s.mp3',
-            },
-          );
-
-          await ref
-              .read(audioPlayerNotifierProvider.notifier)
-              .startPlayList([item, item1], 0);
-        },
-      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
