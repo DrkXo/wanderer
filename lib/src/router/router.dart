@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wanderer/src/features/home/view/home.dart';
+import 'package:wanderer/src/features/player/view/player_maximized_view.dart';
 import 'package:wanderer/src/features/youtube/view/youtube_search.dart';
 
 import '../features/dashboard/view/dashboard.dart';
@@ -15,11 +16,12 @@ final GlobalKey<NavigatorState> _shellNavigator =
 enum Routes {
   home('/home', 'home'),
   search('/search', 'search'),
+  playerMax('/playerMax', 'playerMax'),
   youtube('/youtube', 'youtube');
 
-  const Routes(this.name, this.key);
+  const Routes(this.name, this.path);
   final String name;
-  final String key;
+  final String path;
 }
 
 @Riverpod(keepAlive: true)
@@ -40,7 +42,7 @@ GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home.name,
-              name: Routes.home.key,
+              name: Routes.home.path,
               builder: (context, state) {
                 return Home(
                   key: state.pageKey,
@@ -54,7 +56,7 @@ GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               path: Routes.youtube.name,
-              name: Routes.youtube.key,
+              name: Routes.youtube.path,
               builder: (context, state) {
                 return YoutubeSearchView(
                   key: state.pageKey,
@@ -64,6 +66,15 @@ GoRouter goRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: Routes.playerMax.name,
+      name: Routes.playerMax.path,
+      builder: (context, state) {
+        return PlayerMaximizedView(
+          key: state.pageKey,
+        );
+      },
     ),
   ],
 );

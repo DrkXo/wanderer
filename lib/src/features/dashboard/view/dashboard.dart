@@ -33,7 +33,7 @@ class Dashboard extends ConsumerWidget {
             onSubmitted: (String val) {
               if (val.trim().isNotEmpty) {
                 ref.read(ytSearchKeyProvider.notifier).update(val);
-                ref.read(routerProvider).goNamed(Routes.youtube.key);
+                ref.read(routerProvider).goNamed(Routes.youtube.path);
               }
             },
           )
