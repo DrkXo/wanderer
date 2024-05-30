@@ -21,7 +21,7 @@ final audioPlayerProvider = Provider<PlayListState>.internal(
 
 typedef AudioPlayerRef = ProviderRef<PlayListState>;
 String _$audioPlayerNotifierHash() =>
-    r'9d2e83e9a68279f8d2e401a7e62a9c203ecc8ae4';
+    r'c73d5a83724dca7a2a194c5e97be8e50eb191e5f';
 
 /// See also [AudioPlayerNotifier].
 @ProviderFor(AudioPlayerNotifier)

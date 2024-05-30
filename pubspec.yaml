@@ -58,7 +58,8 @@ dependencies:
   sleek_circular_slider: ^2.0.1
   anim_search_bar: ^2.0.3
   dynamic_color: ^1.7.0
-  blur: ^4.0.0
+  wave: ^0.2.2
+  animated_bottom_navigation_bar: ^1.3.3
   
 
 dev_dependencies:

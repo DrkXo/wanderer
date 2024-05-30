@@ -689,5 +689,23 @@ class _YtVideoQueryProviderElement
   @override
   String get searchQuery => (origin as YtVideoQueryProvider).searchQuery;
 }
+
+String _$ytSearchStateNotifierHash() =>
+    r'b97c5d0ba9977eaddfe030c3232f75482f27b0a9';
+
+/// See also [YtSearchStateNotifier].
+@ProviderFor(YtSearchStateNotifier)
+final ytSearchStateNotifierProvider = AutoDisposeNotifierProvider<
+    YtSearchStateNotifier, YtSearchModelState>.internal(
+  YtSearchStateNotifier.new,
+  name: r'ytSearchStateNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$ytSearchStateNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$YtSearchStateNotifier = AutoDisposeNotifier<YtSearchModelState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

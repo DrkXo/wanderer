@@ -1,6 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import '../../model/yt_search_state_model.dart';
+
 part 'yt_xplode_provider.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -66,23 +68,43 @@ Future<VideoSearchList> ytVideoQuery(
   return suggestion;
 }
 
-/* @riverpod
-class YtRelatedVideos extends _$YtRelatedVideos {
-  Future<void> onTapNext(Future<RelatedVideosList?> func) async {
-    final data = await func;
 
-    state = AsyncValue.data(data);
-    ref.notifyListeners();
+
+
+
+
+@riverpod
+class YtSearchStateNotifier extends _$YtSearchStateNotifier {
+  Future<void> addRelatedVideo(Future future) async {
+    final data = await future;
+    state = state.copyWith(
+      relatedVideo: [
+        ...state.relatedVideo,
+        ...data,
+      ],
+    );
+  }
+
+  Future<void> addSearchList(Future future) async {
+    final data = await future;
+    state = state.copyWith(
+      searchList: [
+        ...state.searchList,
+        ...data,
+      ],
+    );
+  }
+
+  void setSearchQuery(String value) {
+    state = state.copyWith(searchQuery: value);
   }
 
   @override
-  Future<RelatedVideosList?> build() async {
-    final video = await ref.watch(ytVideoProvider.future);
-
-    final related =
-        await ref.watch(ytXplodeProvider).videos.getRelatedVideos(video);
-
-    return related;
+  YtSearchModelState build() {
+    return YtSearchModelState(
+      videoSearchList: [],
+      searchList: [],
+      relatedVideo: [],
+    );
   }
 }
- */

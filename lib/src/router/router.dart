@@ -5,7 +5,7 @@ import 'package:wanderer/src/features/home/view/home.dart';
 import 'package:wanderer/src/features/player/view/player_maximized_view.dart';
 import 'package:wanderer/src/features/youtube/view/youtube_search.dart';
 
-import '../features/dashboard/view/dashboard.dart';
+import '../features/dashboard/view/dashboard_view.dart';
 
 part 'router.g.dart';
 
@@ -32,7 +32,7 @@ GoRouter goRouter = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return Dashboard(navigationShell: navigationShell);
+        return DashboardView(navigationShell: navigationShell);
       },
       branches: [
         StatefulShellBranch(
@@ -68,25 +68,30 @@ GoRouter goRouter = GoRouter(
     GoRoute(
       path: Routes.playerMax.name,
       name: Routes.playerMax.path,
-      /* pageBuilder: (context, state) {
+      pageBuilder: (context, state) {
         return CustomTransitionPage<void>(
           key: state.pageKey,
           child: const PlayerMaximizedView(),
-          transitionDuration: const Duration(seconds: 1),
+          transitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
           ) {
-            return FadeScaleTransition(
-              animation: animation,
-              child: child,
+            return ClipRect(
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.0, 1.0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ),
             );
           },
         );
-      }, */
-      builder: (context, state) => const PlayerMaximizedView(),
+      },
+      /* builder: (context, state) => const PlayerMaximizedView(), */
     ),
   ],
 );
