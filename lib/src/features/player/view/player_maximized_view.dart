@@ -50,14 +50,14 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  Hero(
-                    tag: PlayerViewHeroTag.artKey,
-                    child: GestureDetector(
-                      onTap: () => setState(() {
-                        showControls = !showControls;
-                      }),
+                  GestureDetector(
+                    onTap: () => setState(() {
+                      showControls = !showControls;
+                    }),
+                    child: Hero(
+                      tag: PlayerViewHeroTag.artKey,
                       child: SizedBox(
-                        // height: MediaQuery.of(context).size.height / 1.8,
+                        height: MediaQuery.of(context).size.height / 4.5,
                         width: MediaQuery.of(context).size.width,
                         child: CachedNetworkImage(
                           imageUrl: currentSong.artUri.toString(),
@@ -83,37 +83,28 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
                 ],
               ),
               const SizedBox(width: 10),
-              Hero(
-                tag: PlayerViewHeroTag.titleKey,
-                child: Text(
-                  currentSong.title,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.labelLarge,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              Text(
+                currentSong.title,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.labelLarge,
+                overflow: TextOverflow.ellipsis,
               ),
-              Hero(
-                tag: PlayerViewHeroTag.artistNameKey,
-                child: Text(
-                  currentSong.artist ?? '',
-                  maxLines: 1,
-                  style: Theme.of(context).textTheme.labelMedium,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              Text(
+                currentSong.artist ?? '',
+                maxLines: 1,
+                style: Theme.of(context).textTheme.labelMedium,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(width: 10),
-              Hero(
-                tag: PlayerViewHeroTag.seekerKey,
-                child: ProgressBar(
-                  progress: playeListTimers.progress,
-                  buffered: playeListTimers.buffered,
-                  total: playeListTimers.total,
-                  thumbCanPaintOutsideBar: false,
-                  timeLabelLocation: TimeLabelLocation.sides,
-                  onSeek: (duration) {
-                    audioPlayerNotifier.seek(duration);
-                  },
-                ),
+              ProgressBar(
+                progress: playeListTimers.progress,
+                buffered: playeListTimers.buffered,
+                total: playeListTimers.total,
+                thumbCanPaintOutsideBar: false,
+                timeLabelLocation: TimeLabelLocation.sides,
+                onSeek: (duration) {
+                  audioPlayerNotifier.seek(duration);
+                },
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -70,11 +71,25 @@ GoRouter goRouter = GoRouter(
     GoRoute(
       path: Routes.playerMax.name,
       name: Routes.playerMax.path,
-      builder: (context, state) {
-        return PlayerMaximizedView(
+      /* pageBuilder: (context, state) {
+        return CustomTransitionPage<void>(
           key: state.pageKey,
+          child: const PlayerMaximizedView(),
+          transitionDuration: const Duration(seconds: 1),
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return FadeScaleTransition(
+              animation: animation,
+              child: child,
+            );
+          },
         );
-      },
+      }, */
+      builder: (context, state) => const PlayerMaximizedView(),
     ),
   ],
 );

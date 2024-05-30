@@ -59,23 +59,17 @@ class PlayerMinimizedView extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Hero(
-                            tag: PlayerViewHeroTag.titleKey,
-                            child: Text(
-                              currentSong.title,
-                              maxLines: 2,
-                              style: Theme.of(context).textTheme.labelLarge,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          Text(
+                            currentSong.title,
+                            maxLines: 2,
+                            style: Theme.of(context).textTheme.labelLarge,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          Hero(
-                            tag: PlayerViewHeroTag.artistNameKey,
-                            child: Text(
-                              currentSong.artist ?? '',
-                              maxLines: 1,
-                              style: Theme.of(context).textTheme.labelMedium,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          Text(
+                            currentSong.artist ?? '',
+                            maxLines: 1,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            overflow: TextOverflow.ellipsis,
                           )
                         ],
                       ),
@@ -86,33 +80,22 @@ class PlayerMinimizedView extends ConsumerWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Hero(
-                            tag: PlayerViewHeroTag.prevKey,
-                            child: GestureDetector(
-                              onTap: () => audioPlayerNotifier.skipToPrevious(),
-                              child: const Icon(Icons.skip_previous_outlined,
-                                  size: 30),
+                          GestureDetector(
+                            onTap: () => audioPlayerNotifier.skipToPrevious(),
+                            child: const Icon(Icons.skip_previous_outlined,
+                                size: 30),
+                          ),
+                          GestureDetector(
+                            onTap: () => audioPlayerNotifier.playPause(),
+                            child: Icon(
+                              playing ? Icons.pause_outlined : Icons.play_arrow,
+                              size: 30,
                             ),
                           ),
-                          Hero(
-                            tag: PlayerViewHeroTag.playPauseKey,
-                            child: GestureDetector(
-                              onTap: () => audioPlayerNotifier.playPause(),
-                              child: Icon(
-                                playing
-                                    ? Icons.pause_outlined
-                                    : Icons.play_arrow,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          Hero(
-                            tag: PlayerViewHeroTag.nextKey,
-                            child: GestureDetector(
-                              onTap: () => audioPlayerNotifier.skipToNext(),
-                              child: const Icon(Icons.skip_next_outlined,
-                                  size: 30),
-                            ),
+                          GestureDetector(
+                            onTap: () => audioPlayerNotifier.skipToNext(),
+                            child:
+                                const Icon(Icons.skip_next_outlined, size: 30),
                           )
                         ],
                       ),
@@ -120,18 +103,15 @@ class PlayerMinimizedView extends ConsumerWidget {
                   ],
                 ),
                 Expanded(
-                  child: Hero(
-                    tag: PlayerViewHeroTag.seekerKey,
-                    child: ProgressBar(
-                      progress: playeListTimers.progress,
-                      buffered: playeListTimers.buffered,
-                      total: playeListTimers.total,
-                      thumbCanPaintOutsideBar: false,
-                      timeLabelLocation: TimeLabelLocation.sides,
-                      onSeek: (duration) {
-                        audioPlayerNotifier.seek(duration);
-                      },
-                    ),
+                  child: ProgressBar(
+                    progress: playeListTimers.progress,
+                    buffered: playeListTimers.buffered,
+                    total: playeListTimers.total,
+                    thumbCanPaintOutsideBar: false,
+                    timeLabelLocation: TimeLabelLocation.sides,
+                    onSeek: (duration) {
+                      audioPlayerNotifier.seek(duration);
+                    },
                   ),
                 ),
               ],

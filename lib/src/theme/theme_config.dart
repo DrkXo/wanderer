@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -5,16 +6,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/provider/shared_pref_provider/shared_pref_provider.dart';
 
-
-
 part 'theme_config.g.dart';
 
 const PageTransitionsTheme _pageTransitionsTheme = PageTransitionsTheme(
   builders: <TargetPlatform, PageTransitionsBuilder>{
-    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
-    TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+    TargetPlatform.android: SharedAxisPageTransitionsBuilder(
+      transitionType: SharedAxisTransitionType.scaled,
+    ),
+    TargetPlatform.iOS: SharedAxisPageTransitionsBuilder(
+      transitionType: SharedAxisTransitionType.scaled,
+    ),
+    TargetPlatform.linux: SharedAxisPageTransitionsBuilder(
+      transitionType: SharedAxisTransitionType.scaled,
+    ),
+    TargetPlatform.macOS: SharedAxisPageTransitionsBuilder(
+      transitionType: SharedAxisTransitionType.scaled,
+    ),
   },
 );
 
@@ -62,12 +69,12 @@ class ThemeConfig extends _$ThemeConfig {
   ThemeData userThemeData() {
     return userThemeMode().isLight
         ? FlexThemeData.light(
-            pageTransitionsTheme: _pageTransitionsTheme,
+            // pageTransitionsTheme: _pageTransitionsTheme,
             scheme: userFlexColorScheme(),
             useMaterial3: true,
           )
         : FlexThemeData.dark(
-            pageTransitionsTheme: _pageTransitionsTheme,
+            // pageTransitionsTheme: _pageTransitionsTheme,
             scheme: userFlexColorScheme(),
             useMaterial3: true,
           );

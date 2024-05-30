@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wanderer/src/features/dashboard/provider/dashboard_notifier.dart';
+import 'package:wanderer/src/features/player/view/player_maximized_view.dart';
 import 'package:wanderer/src/features/youtube/provider/youtube_search_notifier.dart';
 import 'package:wanderer/src/router/router.dart';
 
