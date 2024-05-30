@@ -7,7 +7,8 @@ import '../../model/playlist_state_model.dart';
 part 'audio_controller.g.dart';
 
 @Riverpod(keepAlive: true)
-PlayListState audioPlayer<PlayListState>(ref) {
+PlayListState audioPlayer(AudioPlayerRef ref) {
+  //TODO: audioPlayer<PlayListState>(AudioPlayerRef ref) to audioPlayer(AudioPlayerRef ref)
   final x = ref.watch(audioPlayerNotifierProvider);
   return x;
 }
@@ -26,6 +27,12 @@ class AudioPlayerNotifier extends _$AudioPlayerNotifier {
 
   Future<void> startPlayList(List<MediaItem> queue, int index) async {
     await _audioHandler.customAction('start', {'queue': queue, 'index': index});
+  }
+
+  Future<void> startPlayListWithYoutubeMediaItem(
+      List<MediaItem> queue, int index) async {
+    await _audioHandler
+        .customAction('start_yt', {'queue': queue, 'index': index});
   }
 
   void reOrderQueue(int oldIndex, int newIndex) {

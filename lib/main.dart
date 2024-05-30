@@ -2,6 +2,9 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:wanderer/src/common/provider/shared_pref_provider/shared_pref_provider.dart';
 import 'package:wanderer/src/wanderer.dart';
 
 import 'src/common/provider/audio_handler/audio_handler.dart';
@@ -23,6 +26,9 @@ void main() async {
     ),
   );
 
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+
   runApp(
     ProviderScope(
       observers: [
@@ -30,6 +36,7 @@ void main() async {
       ],
       overrides: [
         audioHandlerProvider.overrideWithValue(audioHandler),
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
       child: const Wanderer(),
     ),

@@ -193,6 +193,13 @@ class WandererAudioHandler extends BaseAudioHandler {
     );
   }
 
+  LockCachingAudioSource _CreateLockCachingAudioSource(MediaItem mediaItem) {
+    return LockCachingAudioSource(
+      Uri.parse(mediaItem.extras!['path']),
+      tag: mediaItem,
+    );
+  }
+
   @override
   Future<void> play() => _player.play();
 
@@ -264,6 +271,21 @@ class WandererAudioHandler extends BaseAudioHandler {
           play();
         }
         break;
+      case 'start_yt':
+        {
+          final source = await extras!['queue']
+              .map(_CreateLockCachingAudioSource)
+              .toList()
+              .cast<AudioSource>();
+          //queue.add(extras['queue']);
+          await setShuffleMode(AudioServiceShuffleMode.none);
+          _playList = ConcatenatingAudioSource(children: source);
+          await _player.setAudioSource(
+            _playList,
+            initialIndex: extras['index'],
+          );
+          play();
+        }
       case 'reorder':
         {
           int oldIndex = extras!['oldIndex'] as int;

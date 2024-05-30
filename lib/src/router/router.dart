@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wanderer/src/features/home/view/home.dart';
-import 'package:wanderer/src/features/youtube/view/youtube.dart';
+import 'package:wanderer/src/features/youtube/view/youtube_search.dart';
 
 import '../features/dashboard/view/dashboard.dart';
 
@@ -14,6 +14,7 @@ final GlobalKey<NavigatorState> _shellNavigator =
 
 enum Routes {
   home('/home', 'home'),
+  search('/search', 'search'),
   youtube('/youtube', 'youtube');
 
   const Routes(this.name, this.key);
@@ -25,6 +26,7 @@ enum Routes {
 GoRouter router(RouterRef ref) => goRouter;
 
 GoRouter goRouter = GoRouter(
+  debugLogDiagnostics: true,
   initialLocation: Routes.home.name,
   navigatorKey: _rootNavigator,
   routes: [
@@ -34,7 +36,7 @@ GoRouter goRouter = GoRouter(
       },
       branches: [
         StatefulShellBranch(
-        //  navigatorKey: _shellNavigator,
+          //  navigatorKey: _shellNavigator,
           routes: [
             GoRoute(
               path: Routes.home.name,
@@ -48,13 +50,13 @@ GoRouter goRouter = GoRouter(
           ],
         ),
         StatefulShellBranch(
-       //   navigatorKey: _shellNavigator,
+          //   navigatorKey: _shellNavigator,
           routes: [
             GoRoute(
               path: Routes.youtube.name,
               name: Routes.youtube.key,
               builder: (context, state) {
-                return YoutubeView(
+                return YoutubeSearchView(
                   key: state.pageKey,
                 );
               },
