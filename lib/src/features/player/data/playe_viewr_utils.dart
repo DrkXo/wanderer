@@ -1,4 +1,5 @@
 enum PlayerViewHeroTag {
+  view,
   artKey,
   titleKey,
   artistNameKey,
