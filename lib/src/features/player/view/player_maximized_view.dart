@@ -1,8 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wanderer/src/features/player/widget/audio_player_art.dart';
 import 'package:wanderer/src/features/player/widget/audio_player_seeker.dart';
 import 'package:wanderer/src/features/player/widget/player_control_buttons.dart';
+import 'package:wanderer/src/features/player/widget/player_queue.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
 
@@ -68,6 +70,23 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
               height: 5,
             ),
           ],
+        ),
+        floatingActionButton: OpenContainer(
+          closedBuilder: (BuildContext context, openContainer) {
+            return FloatingActionButton(
+              onPressed: openContainer,
+              // label: const Text('Current Playlist'),
+              child: const Icon(
+                Icons.queue_music_outlined,
+              ),
+            );
+          },
+          openBuilder: (BuildContext context, closeContainer) {
+            return const FractionallySizedBox(
+              heightFactor: .6,
+              child: PlayerQueueWidget(),
+            );
+          },
         ),
       );
     }

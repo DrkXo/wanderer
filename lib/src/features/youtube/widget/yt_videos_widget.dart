@@ -48,6 +48,8 @@ class _YoutubeSearchViewState extends ConsumerState<YtVideosWidget> {
                   },
                   leading: CachedNetworkImage(
                     imageUrl: f.thumbnails.lowResUrl,
+                    height: 80,
+                    width: 60,
                     alignment: Alignment.center,
                   ),
                   //isThreeLine: true,
