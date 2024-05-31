@@ -7,16 +7,16 @@ import 'package:wanderer/src/features/youtube/provider/youtube_search_notifier.d
 import 'package:wanderer/src/utils/media_item_extention.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-class YoutubeContentView extends ConsumerStatefulWidget {
-  const YoutubeContentView({
+class YtVideosWidget extends ConsumerStatefulWidget {
+  const YtVideosWidget({
     super.key,
   });
 
   @override
-  ConsumerState<YoutubeContentView> createState() => _YoutubeSearchViewState();
+  ConsumerState<YtVideosWidget> createState() => _YoutubeSearchViewState();
 }
 
-class _YoutubeSearchViewState extends ConsumerState<YoutubeContentView> {
+class _YoutubeSearchViewState extends ConsumerState<YtVideosWidget> {
   @override
   Widget build(BuildContext context) {
     final searchStateNotifier =
@@ -27,7 +27,7 @@ class _YoutubeSearchViewState extends ConsumerState<YoutubeContentView> {
     final searchedVideos = ref.watch(ytSearchStateNotifierProvider
         .select((selector) => selector.value?.videoSearchList));
 
-    return searchKey != null
+    return searchKey != null && searchKey.isNotEmpty
         ? ref.watch(ytVideoQueryProvider(searchKey)).when(
             data: (VideoSearchList data) {
               final tiles = searchedVideos?.map((Video f) {
@@ -56,8 +56,8 @@ class _YoutubeSearchViewState extends ConsumerState<YoutubeContentView> {
                 );
               }).toList();
 
-              return ListView(
-                shrinkWrap: true,
+              return Column(
+                //shrinkWrap: true,
                 children: [
                   ...tiles ?? [],
                   IconButton(

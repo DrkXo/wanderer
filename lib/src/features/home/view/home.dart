@@ -6,8 +6,9 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      child: Text('Home'),
+    return Text(
+      'Home',
+      style: Theme.of(context).textTheme.headlineLarge,
     );
   }
 }

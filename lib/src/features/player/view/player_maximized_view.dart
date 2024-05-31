@@ -4,7 +4,6 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wanderer/src/features/player/data/playe_viewr_utils.dart';
 import 'package:wanderer/src/features/player/widget/player_control_buttons.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
@@ -54,14 +53,11 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
                     onTap: () => setState(() {
                       showControls = !showControls;
                     }),
-                    child: Hero(
-                      tag: PlayerViewHeroTag.artKey,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height / 4.5,
-                        width: MediaQuery.of(context).size.width,
-                        child: CachedNetworkImage(
-                          imageUrl: currentSong.artUri.toString(),
-                        ),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 4.5,
+                      width: MediaQuery.of(context).size.width,
+                      child: CachedNetworkImage(
+                        imageUrl: currentSong.artUri.toString(),
                       ),
                     ),
                   ),
