@@ -9,7 +9,7 @@ import 'package:wanderer/src/features/player/view/player_minimized_view.dart';
 import '../../../router/router.dart';
 import '../../youtube/provider/youtube_search_notifier.dart';
 
-class DashboardView extends ConsumerWidget {
+/* class DashboardView extends ConsumerWidget {
   const DashboardView({
     super.key,
     required this.navigationShell,
@@ -65,6 +65,106 @@ class DashboardView extends ConsumerWidget {
               child: PlayerMinimizedView(),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+        itemCount: iconList.length,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        tabBuilder: (int index, bool isActive) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconList[index],
+                size: 24,
+                color: isActive ? Theme.of(context).primaryColor : Colors.grey,
+              ),
+              Text(titleList[index]),
+            ],
+          );
+        },
+        // activeIndex: _bottomNavIndex,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.defaultEdge,
+        leftCornerRadius: 32,
+        rightCornerRadius: 32,
+        activeIndex: navigationShell.currentIndex,
+        onTap: (int index) =>
+            dashboardNotifier.onTapNavigationItem(navigationShell, index),
+      ),
+    );
+  }
+}
+ */
+
+class DashboardView extends ConsumerWidget {
+  const DashboardView({
+    super.key,
+    required this.navigationShell,
+  });
+
+  final StatefulNavigationShell navigationShell;
+  final iconList = const [
+    Icons.home_outlined,
+    Icons.music_note_outlined,
+  ];
+  final titleList = const [
+    'Home',
+    'Yt',
+  ];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboardNotifier = ref.watch(dashboardNotifierProvider);
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              floating: true,
+              snap: true,
+              pinned: true,
+              expandedHeight: 130,
+              title: const Text('Wanderer'),
+              flexibleSpace: FlexibleSpaceBar(
+                background: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    AnimSearchBar(
+                      rtl: true,
+                      width: MediaQuery.of(context).size.width,
+                      textController: TextEditingController(),
+                      onSuffixTap: () {},
+                      onSubmitted: (String val) {
+                        if (val.trim().isNotEmpty) {
+                          ref
+                              .watch(ytSearchStateNotifierProvider.notifier)
+                              .setSearchQuery(val);
+                          ref.read(routerProvider).goNamed(Routes.youtube.name);
+                        }
+                      },
+                    )
+                  ],
+                ),
+              ),
+            )
+          ];
+        },
+        body: AnimatedPadding(
+          padding: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
+          child: Column(
+            children: [
+              Expanded(
+                child: navigationShell,
+              ),
+              const IntrinsicHeight(
+                child: PlayerMinimizedView(),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
