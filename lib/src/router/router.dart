@@ -17,9 +17,9 @@ enum Routes {
   playerMax('/playerMax', 'playerMax'),
   youtube('/youtube', 'youtube');
 
-  const Routes(this.name, this.path);
-  final String name;
+  const Routes(this.path, this.name);
   final String path;
+  final String name;
 }
 
 @Riverpod(keepAlive: true)
@@ -27,7 +27,7 @@ GoRouter router(RouterRef ref) => goRouter;
 
 GoRouter goRouter = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: Routes.home.name,
+  initialLocation: Routes.home.path,
   navigatorKey: _rootNavigator,
   routes: [
     StatefulShellRoute.indexedStack(
@@ -36,11 +36,10 @@ GoRouter goRouter = GoRouter(
       },
       branches: [
         StatefulShellBranch(
-          //  navigatorKey: _shellNavigator,
           routes: [
             GoRoute(
-              path: Routes.home.name,
-              name: Routes.home.path,
+              path: Routes.home.path,
+              name: Routes.home.name,
               builder: (context, state) {
                 return Home(
                   key: state.pageKey,
@@ -50,13 +49,12 @@ GoRouter goRouter = GoRouter(
           ],
         ),
         StatefulShellBranch(
-          //   navigatorKey: _shellNavigator,
           routes: [
             GoRoute(
-              path: Routes.youtube.name,
-              name: Routes.youtube.path,
+              path: Routes.youtube.path,
+              name: Routes.youtube.name,
               builder: (context, state) {
-                return YoutubeSearchView(
+                return YoutubeContentView(
                   key: state.pageKey,
                 );
               },
@@ -66,8 +64,8 @@ GoRouter goRouter = GoRouter(
       ],
     ),
     GoRoute(
-      path: Routes.playerMax.name,
-      name: Routes.playerMax.path,
+      path: Routes.playerMax.path,
+      name: Routes.playerMax.name,
       pageBuilder: (context, state) {
         return CustomTransitionPage<void>(
           key: state.pageKey,

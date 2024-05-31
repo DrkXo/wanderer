@@ -7,24 +7,30 @@ import 'package:wanderer/src/features/youtube/provider/youtube_search_notifier.d
 import 'package:wanderer/src/utils/media_item_extention.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-class YoutubeSearchView extends ConsumerStatefulWidget {
-  const YoutubeSearchView({
+class YoutubeContentView extends ConsumerStatefulWidget {
+  const YoutubeContentView({
     super.key,
   });
 
   @override
-  ConsumerState<YoutubeSearchView> createState() => _YoutubeSearchViewState();
+  ConsumerState<YoutubeContentView> createState() => _YoutubeSearchViewState();
 }
 
-class _YoutubeSearchViewState extends ConsumerState<YoutubeSearchView> {
+class _YoutubeSearchViewState extends ConsumerState<YoutubeContentView> {
   @override
   Widget build(BuildContext context) {
-    final searchKey = ref.watch(ytSearchKeyProvider);
+    final searchStateNotifier =
+        ref.watch(ytSearchStateNotifierProvider.notifier);
+    final searchKey = ref.watch(ytSearchStateNotifierProvider
+        .select((selector) => selector.value?.searchQuery));
+
+    final searchedVideos = ref.watch(ytSearchStateNotifierProvider
+        .select((selector) => selector.value?.videoSearchList));
 
     return searchKey != null
         ? ref.watch(ytVideoQueryProvider(searchKey)).when(
             data: (VideoSearchList data) {
-              final tiles = data.map((Video f) {
+              final tiles = searchedVideos?.map((Video f) {
                 return ListTile(
                   onTap: () async {
                     final info = await ref
@@ -32,9 +38,12 @@ class _YoutubeSearchViewState extends ConsumerState<YoutubeSearchView> {
 
                     await ref
                         .read(audioPlayerNotifierProvider.notifier)
-                        .startPlayListWithYoutubeMediaItem([
-                      f.toMediaItem(url: info.url.toString()),
-                    ], 0);
+                        .startPlayListWithYoutubeMediaItem(
+                      [
+                        f.toMediaItem(url: info.url.toString()),
+                      ],
+                      0,
+                    );
                   },
                   leading: SizedBox(
                     height: 20,
@@ -50,11 +59,11 @@ class _YoutubeSearchViewState extends ConsumerState<YoutubeSearchView> {
               return ListView(
                 shrinkWrap: true,
                 children: [
-                  ...tiles,
+                  ...tiles ?? [],
                   IconButton(
                     onPressed: () async {
-                      final x = await data.nextPage();
-                      if (x != null) {}
+                      searchStateNotifier
+                          .addVideoSearchListData(data.nextPage());
                     },
                     icon: const Icon(Icons.arrow_right),
                   ),
@@ -65,7 +74,11 @@ class _YoutubeSearchViewState extends ConsumerState<YoutubeSearchView> {
               return Text('$error');
             },
             loading: () {
-              return const LinearProgressIndicator();
+              return const Column(
+                children: [
+                  LinearProgressIndicator(),
+                ],
+              );
             },
           )
         : const SizedBox.shrink();

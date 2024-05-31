@@ -29,7 +29,7 @@ class PlayerMinimizedView extends ConsumerWidget {
         effects: const [SlideEffect()],
         child: GestureDetector(
           onTap: () {
-            ref.read(routerProvider).pushNamed(Routes.playerMax.path);
+            ref.read(routerProvider).pushNamed(Routes.playerMax.name);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

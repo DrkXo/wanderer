@@ -41,8 +41,10 @@ class DashboardView extends ConsumerWidget {
             onSuffixTap: () {},
             onSubmitted: (String val) {
               if (val.trim().isNotEmpty) {
-                ref.read(ytSearchKeyProvider.notifier).update(val);
-                ref.read(routerProvider).goNamed(Routes.youtube.path);
+                ref
+                    .read(ytSearchStateNotifierProvider.notifier)
+                    .setSearchQuery(val);
+                ref.read(routerProvider).goNamed(Routes.youtube.name);
               }
             },
           )
