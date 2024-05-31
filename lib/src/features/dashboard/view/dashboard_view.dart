@@ -30,7 +30,7 @@ class DashboardView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardNotifier = ref.watch(dashboardNotifierProvider);
-
+    final ytSearchNotifier = ref.watch(ytSearchStateNotifierProvider.notifier);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -43,9 +43,7 @@ class DashboardView extends ConsumerWidget {
             onSuffixTap: () {},
             onSubmitted: (String val) {
               if (val.trim().isNotEmpty) {
-                ref
-                    .read(ytSearchStateNotifierProvider.notifier)
-                    .setSearchQuery(val);
+                ytSearchNotifier.setSearchQuery(val);
                 ref.read(routerProvider).goNamed(Routes.youtube.name);
               }
             },

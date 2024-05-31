@@ -47,7 +47,14 @@ class YtSearchStateNotifier extends _$YtSearchStateNotifier {
   }
 
   void setSearchQuery(String value) {
-    state = AsyncValue.data(state.value!.copyWith(searchQuery: value));
+    state = AsyncValue.data(
+      YtSearchModelState(
+        searchQuery: value,
+        videoSearchList: [],
+        searchList: [],
+        relatedVideo: [],
+      ),
+    );
   }
 
   @override

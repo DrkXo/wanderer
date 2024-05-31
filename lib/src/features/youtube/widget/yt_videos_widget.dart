@@ -1,3 +1,4 @@
+import 'package:async_button_builder/async_button_builder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,14 +46,20 @@ class _YoutubeSearchViewState extends ConsumerState<YtVideosWidget> {
                       0,
                     );
                   },
-                  leading: SizedBox(
-                    height: 20,
-                    width: 30,
-                    child: CachedNetworkImage(
-                      imageUrl: f.thumbnails.lowResUrl,
-                    ),
+                  leading: CachedNetworkImage(
+                    imageUrl: f.thumbnails.lowResUrl,
+                    alignment: Alignment.center,
                   ),
-                  title: Text(f.title),
+                  //isThreeLine: true,
+                  title: Text(
+                    f.title,
+                    maxLines: 2,
+                  ),
+                  subtitle: Text('Channel: ${f.author}'),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.more_vert_outlined),
+                  ),
                 );
               }).toList();
 
@@ -60,12 +67,19 @@ class _YoutubeSearchViewState extends ConsumerState<YtVideosWidget> {
                 //shrinkWrap: true,
                 children: [
                   ...tiles ?? [],
-                  IconButton(
+                  AsyncButtonBuilder(
                     onPressed: () async {
-                      searchStateNotifier
+                      await searchStateNotifier
                           .addVideoSearchListData(data.nextPage());
                     },
-                    icon: const Icon(Icons.arrow_right),
+                    loadingWidget: const LinearProgressIndicator(),
+                    builder: (context, child, callback, _) {
+                      return TextButton(
+                        onPressed: callback,
+                        child: child,
+                      );
+                    },
+                    child: const Text('Load More'),
                   ),
                 ],
               );
