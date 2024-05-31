@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wanderer/src/features/home/view/home.dart';
 import 'package:wanderer/src/features/player/view/player_maximized_view.dart';
-import 'package:wanderer/src/features/youtube/view/youtube_search.dart';
+import 'package:wanderer/src/features/youtube/view/youtube_content_view.dart';
 
 import '../features/dashboard/view/dashboard_view.dart';
 
