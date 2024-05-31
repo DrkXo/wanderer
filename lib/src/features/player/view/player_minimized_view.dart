@@ -3,8 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wanderer/src/common/model/playlist_state_model.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
+import '../widget/audio_player_seeker.dart';
 
 class PlayerMinimizedView extends ConsumerWidget {
   const PlayerMinimizedView({super.key});
@@ -92,17 +94,8 @@ class PlayerMinimizedView extends ConsumerWidget {
                   )
                 ],
               ),
-              Expanded(
-                child: ProgressBar(
-                  progress: playeListTimers.progress,
-                  buffered: playeListTimers.buffered,
-                  total: playeListTimers.total,
-                  thumbCanPaintOutsideBar: false,
-                  timeLabelLocation: TimeLabelLocation.sides,
-                  onSeek: (duration) {
-                    audioPlayerNotifier.seek(duration);
-                  },
-                ),
+              const Expanded(
+                child: AudioPlayerSeeker(),
               ),
             ],
           ),
@@ -111,3 +104,4 @@ class PlayerMinimizedView extends ConsumerWidget {
     }
   }
 }
+
