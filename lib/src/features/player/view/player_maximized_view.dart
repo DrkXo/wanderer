@@ -1,10 +1,6 @@
-import 'dart:ui';
-
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wanderer/src/features/player/widget/player_control_buttons.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
 
@@ -18,8 +14,14 @@ class PlayerMaximizedView extends ConsumerStatefulWidget {
 
 class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
   OverlayPortalController overlayPortalController = OverlayPortalController();
-
+  final ScrollController scrollController = ScrollController();
   bool showControls = false;
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,74 +38,64 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
       return const SizedBox.shrink();
     } else {
       return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () => setState(() {
-                      showControls = !showControls;
-                    }),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 4.5,
-                      width: MediaQuery.of(context).size.width,
-                      child: CachedNetworkImage(
-                        imageUrl: currentSong.artUri.toString(),
+        body: CustomScrollView(
+          controller: scrollController,
+          slivers: [
+            SliverAppBar(
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
+              pinned: true,
+              snap: true,
+              floating: true,
+              collapsedHeight: MediaQuery.of(context).size.height / 3,
+              expandedHeight: MediaQuery.of(context).size.height / 3,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  currentSong.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                background: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 26, 0, 0),
+                  child: ShaderMask(
+                    shaderCallback: (Rect bounds) {
+                      return LinearGradient(
+                        colors: [
+                          Colors.black,
+                          Colors.grey.withOpacity(.5),
+                        ],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                      ).createShader(bounds);
+                    },
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: currentSong.artUri.toString(),
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(
+                          Icons.error_outline,
+                        ),
                       ),
                     ),
                   ),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: showControls
-                        ? BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 3.0,
-                              sigmaY: 3.0,
-                            ),
-                            child: PlayerMaximizedControlButtons(
-                              audioPlayerNotifier: audioPlayerNotifier,
-                              playing: playing,
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                  ),
-                ],
+                ),
               ),
-              const SizedBox(width: 10),
-              Text(
-                currentSong.title,
-                maxLines: 2,
-                style: Theme.of(context).textTheme.labelLarge,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                currentSong.artist ?? '',
-                maxLines: 1,
-                style: Theme.of(context).textTheme.labelMedium,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(width: 10),
-              ProgressBar(
-                progress: playeListTimers.progress,
-                buffered: playeListTimers.buffered,
-                total: playeListTimers.total,
-                thumbCanPaintOutsideBar: false,
-                timeLabelLocation: TimeLabelLocation.sides,
-                onSeek: (duration) {
-                  audioPlayerNotifier.seek(duration);
-                },
-              ),
-            ],
-          ),
+            ),
+            SliverList.builder(
+              itemCount: 20,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text('${index + 1}.'),
+                );
+              },
+            ),
+          ],
         ),
       );
     }
