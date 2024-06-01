@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wanderer/src/common/model/db/custom_media_item.dart';
 import 'package:wanderer/src/common/provider/shared_pref_provider/shared_pref_provider.dart';
@@ -17,7 +16,7 @@ import 'src/common/repo/repo_keys/db_repo_keys.dart';
 Future<void> _initHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MediaItemDbAdapter());
-  // await _cleanHive();
+  //await _cleanHive();
   log('Hive Initialized......');
 }
 

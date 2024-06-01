@@ -9,26 +9,28 @@ class HistoryWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(mediaItemHistoryProvider).when(
       data: (items) {
-        return RefreshIndicator.adaptive(
-          onRefresh: () async {
-            ref.invalidate(mediaItemHistoryProvider);
-          },
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Text(
-                'History',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              ...items.map(
-                (e) => ListTile(
-                  title: Text(e.title),
-                  subtitle: Text('${e.artist}'),
+        return items.isNotEmpty
+            ? RefreshIndicator.adaptive(
+                onRefresh: () async {
+                  ref.invalidate(mediaItemHistoryProvider);
+                },
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Text(
+                      'History',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    ...items.map(
+                      (e) => ListTile(
+                        title: Text(e.title),
+                        subtitle: Text('${e.artist}'),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        );
+              )
+            : const SizedBox.shrink();
       },
       error: (error, s) {
         return Text('$error');

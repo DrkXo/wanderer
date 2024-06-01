@@ -41,7 +41,10 @@ class _YoutubeSearchViewState extends ConsumerState<YtVideosWidget> {
                         .read(audioPlayerNotifierProvider.notifier)
                         .startPlayListWithYoutubeMediaItem(
                       [
-                        f.toMediaItem(url: info.url.toString()),
+                        f.toMediaItem(
+                          audioUrl: info.audioStreamInfo.url.toString(),
+                          videoUrl: info.videoStreamInfo.url.toString(),
+                        ),
                       ],
                       0,
                     );

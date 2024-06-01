@@ -188,14 +188,14 @@ class WandererAudioHandler extends BaseAudioHandler {
 
   UriAudioSource _createAudioSource(MediaItem mediaItem) {
     return AudioSource.uri(
-      Uri.parse(mediaItem.extras!['path']),
+      Uri.parse(mediaItem.extras!['audio_path']),
       tag: mediaItem,
     );
   }
 
   LockCachingAudioSource _createLockCachingAudioSource(MediaItem mediaItem) {
     return LockCachingAudioSource(
-      Uri.parse(mediaItem.extras!['path']),
+      Uri.parse(mediaItem.extras!['audio_path']),
       tag: mediaItem,
     );
   }

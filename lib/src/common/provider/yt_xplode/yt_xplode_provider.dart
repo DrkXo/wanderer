@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wanderer/src/common/model/yt_parsed_data_model.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../../../features/youtube/provider/youtube_search_notifier.dart';
@@ -29,24 +30,14 @@ Future<Video> ytVideo(YtVideoRef ref, String id) async {
 }
 
 @riverpod
-Future<StreamInfo> ytStreamInfoFromId(
-    YtStreamInfoFromIdRef ref, String id) async {
+Future<YtParsedData> ytStreamInfoFromId(
+  YtStreamInfoFromIdRef ref,
+  String id,
+) async {
   try {
-    String quality = 'Medium'.toLowerCase();
-    int qualityIndex = 0;
     StreamManifest manifest =
         await ref.watch(ytXplodeProvider).videos.streamsClient.getManifest(id);
-    List<AudioOnlyStreamInfo> streamInfos =
-        manifest.audioOnly.sortByBitrate().reversed.toList();
-    if (quality == 'low') {
-      qualityIndex = 0;
-    } else if (quality == 'medium') {
-      qualityIndex = (streamInfos.length / 2).floor();
-    } else {
-      qualityIndex = streamInfos.length - 1;
-    }
-    AudioOnlyStreamInfo streamInfo = streamInfos[qualityIndex];
-    return streamInfo;
+    return YtParsedData(manifest: manifest, videoId: id);
   } catch (e) {
     throw Exception('Unable to parse youtube data!');
   }

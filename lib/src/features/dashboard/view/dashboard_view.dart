@@ -100,11 +100,13 @@ class DashboardView extends ConsumerWidget {
         // activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.defaultEdge,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
+        // leftCornerRadius: 32,
+        // rightCornerRadius: 32,
         activeIndex: navigationShell.currentIndex,
-        onTap: (int index) =>
-            dashboardNotifier.onTapNavigationItem(navigationShell, index),
+        onTap: (int index) => dashboardNotifier.onTapNavigationItem(
+          navigationShell,
+          index,
+        ),
       ),
     );
   }

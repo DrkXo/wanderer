@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../common/repo/media_item_repo.dart';
+
 part 'dashboard_notifier.g.dart';
 
 @riverpod
@@ -13,6 +15,9 @@ class DashboardNotifier extends _$DashboardNotifier {
       index,
       initialLocation: index == navigationShell.currentIndex,
     );
+    if (index == 0) {
+      ref.invalidate(mediaItemHistoryProvider);
+    }
   }
 
   TextEditingController getSearchController() => _searchController;

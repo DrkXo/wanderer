@@ -299,14 +299,14 @@ class _YtVideoProviderElement extends AutoDisposeFutureProviderElement<Video>
 }
 
 String _$ytStreamInfoFromIdHash() =>
-    r'78de6dc32fddaa4e3c7e217cf871c9d330c7733b';
+    r'8593576ccdee17fe247650b9ea0065c85dc548d7';
 
 /// See also [ytStreamInfoFromId].
 @ProviderFor(ytStreamInfoFromId)
 const ytStreamInfoFromIdProvider = YtStreamInfoFromIdFamily();
 
 /// See also [ytStreamInfoFromId].
-class YtStreamInfoFromIdFamily extends Family<AsyncValue<StreamInfo>> {
+class YtStreamInfoFromIdFamily extends Family<AsyncValue<YtParsedData>> {
   /// See also [ytStreamInfoFromId].
   const YtStreamInfoFromIdFamily();
 
@@ -344,7 +344,8 @@ class YtStreamInfoFromIdFamily extends Family<AsyncValue<StreamInfo>> {
 }
 
 /// See also [ytStreamInfoFromId].
-class YtStreamInfoFromIdProvider extends AutoDisposeFutureProvider<StreamInfo> {
+class YtStreamInfoFromIdProvider
+    extends AutoDisposeFutureProvider<YtParsedData> {
   /// See also [ytStreamInfoFromId].
   YtStreamInfoFromIdProvider(
     String id,
@@ -379,7 +380,7 @@ class YtStreamInfoFromIdProvider extends AutoDisposeFutureProvider<StreamInfo> {
 
   @override
   Override overrideWith(
-    FutureOr<StreamInfo> Function(YtStreamInfoFromIdRef provider) create,
+    FutureOr<YtParsedData> Function(YtStreamInfoFromIdRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -396,7 +397,7 @@ class YtStreamInfoFromIdProvider extends AutoDisposeFutureProvider<StreamInfo> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<StreamInfo> createElement() {
+  AutoDisposeFutureProviderElement<YtParsedData> createElement() {
     return _YtStreamInfoFromIdProviderElement(this);
   }
 
@@ -414,13 +415,13 @@ class YtStreamInfoFromIdProvider extends AutoDisposeFutureProvider<StreamInfo> {
   }
 }
 
-mixin YtStreamInfoFromIdRef on AutoDisposeFutureProviderRef<StreamInfo> {
+mixin YtStreamInfoFromIdRef on AutoDisposeFutureProviderRef<YtParsedData> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _YtStreamInfoFromIdProviderElement
-    extends AutoDisposeFutureProviderElement<StreamInfo>
+    extends AutoDisposeFutureProviderElement<YtParsedData>
     with YtStreamInfoFromIdRef {
   _YtStreamInfoFromIdProviderElement(super.provider);
 
