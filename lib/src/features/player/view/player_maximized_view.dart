@@ -7,6 +7,7 @@ import 'package:wanderer/src/features/player/widget/player_control_buttons.dart'
 import 'package:wanderer/src/features/player/widget/player_queue.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
+import '../widget/video_player.dart';
 
 class PlayerMaximizedView extends ConsumerStatefulWidget {
   const PlayerMaximizedView({super.key});
@@ -32,8 +33,6 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
     final currentSong =
         ref.watch(audioPlayerProvider.select((value) => value.currentSong));
 
-    final playeListTimers =
-        ref.watch(audioPlayerProvider.select((value) => value));
     final playing =
         ref.watch(audioPlayerProvider.select((value) => value.playing));
     final audioPlayerNotifier = ref.watch(audioPlayerNotifierProvider.notifier);
@@ -69,6 +68,13 @@ class _YtPlayerMaximizedViewState extends ConsumerState<PlayerMaximizedView> {
             const SizedBox(
               height: 5,
             ),
+            Expanded(
+              child: YtVideoPlayer(
+                uri: Uri.parse(
+                  currentSong.extras?['video_path'],
+                ),
+              ),
+            )
           ],
         ),
         floatingActionButton: OpenContainer(

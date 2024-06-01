@@ -1,7 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-extension YtVideoExtention on Video {
+extension YtVideoExtension on Video {
   MediaItem toMediaItem({
     required String audioUrl,
     required String videoUrl,

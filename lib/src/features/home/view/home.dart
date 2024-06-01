@@ -18,7 +18,9 @@ class Home extends ConsumerWidget {
         const SizedBox(
           height: 5,
         ),
-        const HistoryWidget(),
+        const Expanded(
+          child: HistoryWidget(),
+        ),
       ],
     );
   }
