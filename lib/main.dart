@@ -2,11 +2,19 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wanderer/src/common/model/db/custom_media_item.dart';
 import 'package:wanderer/src/common/provider/shared_pref_provider/shared_pref_provider.dart';
 import 'package:wanderer/src/wanderer.dart';
 
 import 'src/common/provider/audio_handler/audio_handler.dart';
+
+Future<void> _initHive() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(MediaItemDbAdapter());
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +34,10 @@ void main() async {
 
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
+
+  //init the Hive
+
+  await _initHive();
 
   runApp(
     ProviderScope(

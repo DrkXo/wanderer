@@ -193,7 +193,7 @@ class WandererAudioHandler extends BaseAudioHandler {
     );
   }
 
-  LockCachingAudioSource _CreateLockCachingAudioSource(MediaItem mediaItem) {
+  LockCachingAudioSource _createLockCachingAudioSource(MediaItem mediaItem) {
     return LockCachingAudioSource(
       Uri.parse(mediaItem.extras!['path']),
       tag: mediaItem,
@@ -274,7 +274,7 @@ class WandererAudioHandler extends BaseAudioHandler {
       case 'start_yt':
         {
           final source = await extras!['queue']
-              .map(_CreateLockCachingAudioSource)
+              .map(_createLockCachingAudioSource)
               .toList()
               .cast<AudioSource>();
           //queue.add(extras['queue']);

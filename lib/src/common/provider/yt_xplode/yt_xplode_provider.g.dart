@@ -561,7 +561,7 @@ class _YtVideoQuerySuggestionProviderElement
       (origin as YtVideoQuerySuggestionProvider).searchQuery;
 }
 
-String _$ytVideoQueryHash() => r'1ccc187d4142cfaf77ef687cc3abe1a74d00febc';
+String _$ytVideoQueryHash() => r'47e68fd4ade988201c800cd9de718ebd50142924';
 
 /// See also [ytVideoQuery].
 @ProviderFor(ytVideoQuery)

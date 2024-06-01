@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wanderer/src/common/model/db/custom_media_item.dart';
 import 'package:wanderer/src/common/provider/audio_handler/audio_handler.dart';
+import 'package:wanderer/src/common/repo/media_item_repo.dart';
 
 import '../../model/playlist_state_model.dart';
 
@@ -33,6 +37,16 @@ class AudioPlayerNotifier extends _$AudioPlayerNotifier {
       List<MediaItem> queue, int index) async {
     await _audioHandler
         .customAction('start_yt', {'queue': queue, 'index': index});
+
+    try {
+      await ref.read(mediaItemHistoryDbProvider.future);
+      for (var item in queue) {
+        final tmp = MediaItemDb.fromMediaItem(item);
+        await tmp.save();
+      }
+    } catch (e) {
+      log('$e');
+    }
   }
 
   void reOrderQueue(int oldIndex, int newIndex) {

@@ -7,7 +7,7 @@ part of 'youtube_search_notifier.dart';
 // **************************************************************************
 
 String _$ytSearchStateNotifierHash() =>
-    r'0874d4c862803abbc0feb18b3a71fad80a4debe0';
+    r'bb25bca3088e824aabdbdc473b24b2d4d04faf62';
 
 /// See also [YtSearchStateNotifier].
 @ProviderFor(YtSearchStateNotifier)
