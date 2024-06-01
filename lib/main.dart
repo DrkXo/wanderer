@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,10 +12,19 @@ import 'package:wanderer/src/common/provider/shared_pref_provider/shared_pref_pr
 import 'package:wanderer/src/wanderer.dart';
 
 import 'src/common/provider/audio_handler/audio_handler.dart';
+import 'src/common/repo/repo_keys/db_repo_keys.dart';
 
 Future<void> _initHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MediaItemDbAdapter());
+  // await _cleanHive();
+  log('Hive Initialized......');
+}
+
+// ignore: unused_element
+Future<void> _cleanHive() async {
+  final box1 = await Hive.openBox<MediaItemDb>(DbRepoKeys.history.name);
+  box1.clear();
 }
 
 void main() async {

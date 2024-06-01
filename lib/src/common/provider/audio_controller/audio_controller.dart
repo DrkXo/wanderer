@@ -39,10 +39,10 @@ class AudioPlayerNotifier extends _$AudioPlayerNotifier {
         .customAction('start_yt', {'queue': queue, 'index': index});
 
     try {
-      await ref.read(mediaItemHistoryDbProvider.future);
+      final box = await ref.read(mediaItemHistoryDbProvider.future);
       for (var item in queue) {
         final tmp = MediaItemDb.fromMediaItem(item);
-        await tmp.save();
+        await box.add(tmp);
       }
     } catch (e) {
       log('$e');

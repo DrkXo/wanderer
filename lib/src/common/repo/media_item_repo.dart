@@ -13,3 +13,12 @@ Future<Box<MediaItemDb>> mediaItemHistoryDb(MediaItemHistoryDbRef ref) async {
   });
   return historyBox;
 }
+
+@riverpod
+Future<List<MediaItemDb>> mediaItemHistory(MediaItemHistoryRef ref) async {
+  final historyBox = await ref.watch(mediaItemHistoryDbProvider.future);
+
+  final items = historyBox.values.toList();
+
+  return items;
+}

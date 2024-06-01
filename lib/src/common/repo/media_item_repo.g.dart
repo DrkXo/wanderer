@@ -23,5 +23,21 @@ final mediaItemHistoryDbProvider =
 );
 
 typedef MediaItemHistoryDbRef = AutoDisposeFutureProviderRef<Box<MediaItemDb>>;
+String _$mediaItemHistoryHash() => r'49f965dbacfd973ce5a371152ece2bf49389041e';
+
+/// See also [mediaItemHistory].
+@ProviderFor(mediaItemHistory)
+final mediaItemHistoryProvider =
+    AutoDisposeFutureProvider<List<MediaItemDb>>.internal(
+  mediaItemHistory,
+  name: r'mediaItemHistoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$mediaItemHistoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef MediaItemHistoryRef = AutoDisposeFutureProviderRef<List<MediaItemDb>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

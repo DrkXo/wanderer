@@ -14,13 +14,13 @@ class MediaItemDb extends HiveObject {
   Map<String, String>? artHeaders;
 
   @HiveField(6)
-  Uri? artUri;
+  String? artUri;
 
   @HiveField(5)
   String? artist;
 
   @HiveField(4)
-  Duration? duration;
+  int? duration;
 
   @HiveField(3)
   Map<String, dynamic>? extras;
@@ -51,12 +51,12 @@ class MediaItemDb extends HiveObject {
     DateTime? createdAt,
     String? album,
     Map<String, String>? artHeaders,
-    Uri? artUri,
+    String? artUri,
     String? artist,
     String? displayDescription,
     String? displaySubtitle,
     String? displayTitle,
-    Duration? duration,
+    int? duration,
     Map<String, dynamic>? extras,
     String? genre,
     String? id,
@@ -80,9 +80,9 @@ class MediaItemDb extends HiveObject {
     return MediaItem(
       id: id,
       title: title,
-      duration: duration,
+      duration: duration == null ? null : Duration(milliseconds: duration!),
       artHeaders: artHeaders,
-      artUri: artUri,
+      artUri: artUri == null ? null : Uri.parse(artUri!),
       genre: genre,
       album: album,
       artist: artist,
@@ -94,9 +94,9 @@ class MediaItemDb extends HiveObject {
     return MediaItemDb(
       id: mediaItem.id,
       title: mediaItem.title,
-      duration: mediaItem.duration,
+      duration: mediaItem.duration?.inMilliseconds,
       artHeaders: mediaItem.artHeaders,
-      artUri: mediaItem.artUri,
+      artUri: mediaItem.artUri.toString(),
       genre: mediaItem.genre,
       album: mediaItem.album,
       artist: mediaItem.artist,
