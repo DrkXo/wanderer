@@ -1,9 +1,7 @@
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wanderer/src/common/model/playlist_state_model.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
 import '../widget/audio_player_seeker.dart';
