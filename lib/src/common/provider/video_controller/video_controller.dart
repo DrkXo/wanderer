@@ -44,7 +44,7 @@ class VideoPlayerNotifier extends _$VideoPlayerNotifier {
         Uri.parse(audioPlayerState.currentSong?.extras?['video_path']),
         videoPlayerOptions: VideoPlayerOptions(
           allowBackgroundPlayback: true,
-        ));
+        ))..initialize();
     VideoPlayerState videoPlayerState = VideoPlayerState(
       playing: audioPlayerState.playing,
       progress: audioPlayerState.progress,
