@@ -64,6 +64,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   miniplayer: ^1.0.1
   video_player: ^2.8.6
+  flutter_slidable: ^3.1.0
 
 dev_dependencies:
   flutter_test:

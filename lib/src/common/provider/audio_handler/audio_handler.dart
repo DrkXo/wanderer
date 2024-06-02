@@ -29,8 +29,21 @@ class WandererAudioHandler extends BaseAudioHandler {
     _listenForSequenceStateChanges();
     _listenForShuffleModeChanges();
     _listenForRepeatModeChanges();
+    _playbackStateListener();
     log('Audio Services Started....');
   }
+
+  //HEEEEEEEEEEEEEEEEEEEEEEELP
+
+  _playbackStateListener() {
+    _player.playerStateStream.listen((state) async {
+      if (state.processingState == ProcessingState.completed) {
+        await stop();
+      }
+    });
+  }
+
+  //HEEEEEEEEEEEEEEEEEEEEEEELP
 
   void _notifyAudioHandlerAboutPlaybackEvents() {
     _player.playbackEventStream.listen(
