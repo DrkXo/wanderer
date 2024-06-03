@@ -562,7 +562,7 @@ class _YtVideoQuerySuggestionProviderElement
       (origin as YtVideoQuerySuggestionProvider).searchQuery;
 }
 
-String _$ytVideoQueryHash() => r'47e68fd4ade988201c800cd9de718ebd50142924';
+String _$ytVideoQueryHash() => r'0d30b753cadea07ebd17bdca26eb5236afaf0a87';
 
 /// See also [ytVideoQuery].
 @ProviderFor(ytVideoQuery)
@@ -689,6 +689,135 @@ class _YtVideoQueryProviderElement
 
   @override
   String get searchQuery => (origin as YtVideoQueryProvider).searchQuery;
+}
+
+String _$ytContentQueryHash() => r'8da121bf90a93df64c32f5e75ee1a3d34a6ccafc';
+
+/// See also [ytContentQuery].
+@ProviderFor(ytContentQuery)
+const ytContentQueryProvider = YtContentQueryFamily();
+
+/// See also [ytContentQuery].
+class YtContentQueryFamily extends Family<AsyncValue<SearchList>> {
+  /// See also [ytContentQuery].
+  const YtContentQueryFamily();
+
+  /// See also [ytContentQuery].
+  YtContentQueryProvider call(
+    String searchQuery,
+  ) {
+    return YtContentQueryProvider(
+      searchQuery,
+    );
+  }
+
+  @override
+  YtContentQueryProvider getProviderOverride(
+    covariant YtContentQueryProvider provider,
+  ) {
+    return call(
+      provider.searchQuery,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'ytContentQueryProvider';
+}
+
+/// See also [ytContentQuery].
+class YtContentQueryProvider extends AutoDisposeFutureProvider<SearchList> {
+  /// See also [ytContentQuery].
+  YtContentQueryProvider(
+    String searchQuery,
+  ) : this._internal(
+          (ref) => ytContentQuery(
+            ref as YtContentQueryRef,
+            searchQuery,
+          ),
+          from: ytContentQueryProvider,
+          name: r'ytContentQueryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$ytContentQueryHash,
+          dependencies: YtContentQueryFamily._dependencies,
+          allTransitiveDependencies:
+              YtContentQueryFamily._allTransitiveDependencies,
+          searchQuery: searchQuery,
+        );
+
+  YtContentQueryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.searchQuery,
+  }) : super.internal();
+
+  final String searchQuery;
+
+  @override
+  Override overrideWith(
+    FutureOr<SearchList> Function(YtContentQueryRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: YtContentQueryProvider._internal(
+        (ref) => create(ref as YtContentQueryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        searchQuery: searchQuery,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<SearchList> createElement() {
+    return _YtContentQueryProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is YtContentQueryProvider && other.searchQuery == searchQuery;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, searchQuery.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin YtContentQueryRef on AutoDisposeFutureProviderRef<SearchList> {
+  /// The parameter `searchQuery` of this provider.
+  String get searchQuery;
+}
+
+class _YtContentQueryProviderElement
+    extends AutoDisposeFutureProviderElement<SearchList>
+    with YtContentQueryRef {
+  _YtContentQueryProviderElement(super.provider);
+
+  @override
+  String get searchQuery => (origin as YtContentQueryProvider).searchQuery;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

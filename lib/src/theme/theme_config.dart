@@ -69,12 +69,12 @@ class ThemeConfig extends _$ThemeConfig {
   ThemeData userThemeData() {
     return userThemeMode().isLight
         ? FlexThemeData.light(
-            // pageTransitionsTheme: _pageTransitionsTheme,
+            //pageTransitionsTheme: _pageTransitionsTheme,
             scheme: userFlexColorScheme(),
             useMaterial3: true,
           )
         : FlexThemeData.dark(
-            // pageTransitionsTheme: _pageTransitionsTheme,
+           // pageTransitionsTheme: _pageTransitionsTheme,
             scheme: userFlexColorScheme(),
             useMaterial3: true,
           );

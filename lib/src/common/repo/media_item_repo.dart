@@ -18,7 +18,7 @@ Future<Box<MediaItemDb>> mediaItemHistoryDb(MediaItemHistoryDbRef ref) async {
 Future<List<MediaItemDb>> mediaItemHistory(MediaItemHistoryRef ref) async {
   final historyBox = await ref.watch(mediaItemHistoryDbProvider.future);
 
-  final items = historyBox.values.toList();
+  final items = historyBox.values.toList().toSet().toList();
 
   return items;
 }

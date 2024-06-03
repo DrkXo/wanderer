@@ -23,7 +23,7 @@ final mediaItemHistoryDbProvider =
 );
 
 typedef MediaItemHistoryDbRef = AutoDisposeFutureProviderRef<Box<MediaItemDb>>;
-String _$mediaItemHistoryHash() => r'49f965dbacfd973ce5a371152ece2bf49389041e';
+String _$mediaItemHistoryHash() => r'fce93ccb0d9b4474ec890965143f70d5ac83136a';
 
 /// See also [mediaItemHistory].
 @ProviderFor(mediaItemHistory)

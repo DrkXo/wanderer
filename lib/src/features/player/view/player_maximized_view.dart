@@ -8,7 +8,6 @@ import 'package:wanderer/src/features/player/widget/player_queue.dart';
 
 import '../../../common/provider/audio_controller/audio_controller.dart';
 
-
 class PlayerMaximizedView extends ConsumerStatefulWidget {
   const PlayerMaximizedView({super.key});
 

@@ -62,10 +62,8 @@ class DashboardView extends ConsumerWidget {
               ),
             ),
             OpenContainer(
-              /* closedColor: Theme.of(context).primaryColor,
-              openColor: Theme.of(context).primaryColor, */
               transitionDuration: const Duration(milliseconds: 300),
-              routeSettings: RouteSettings(name: Routes.playerMax.name),
+              routeSettings: RouteSettings(name: Routes.playerMax.path),
               closedBuilder: (BuildContext context, openContainer) {
                 return GestureDetector(
                   onTap: openContainer,

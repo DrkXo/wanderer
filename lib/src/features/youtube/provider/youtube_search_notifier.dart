@@ -7,41 +7,22 @@ part 'youtube_search_notifier.g.dart';
 
 @riverpod
 class YtSearchStateNotifier extends _$YtSearchStateNotifier {
-  Future<void> updateVideoSearchListData(VideoSearchList data) async {
-    state = AsyncValue.data(state.value!.copyWith(
-      videoSearchList: [
-        ...state.value!.videoSearchList,
-        ...data.map((f) => f),
-      ],
-    ));
-  }
-
-  Future<void> addVideoSearchListData(Future future) async {
+  Future<void> addVideoSearchListData(Future<VideoSearchList?> future) async {
     final data = await future;
     state = AsyncValue.data(state.value!.copyWith(
       videoSearchList: [
         ...state.value!.videoSearchList,
-        ...data.map((f) => f),
+        if (data != null) ...data.map((f) => f),
       ],
     ));
   }
 
-  Future<void> addRelatedVideoData(Future future) async {
-    final data = await future;
-    state = AsyncValue.data(state.value!.copyWith(
-      relatedVideo: [
-        ...state.value!.relatedVideo,
-        ...data,
-      ],
-    ));
-  }
-
-  Future<void> addSearchListData(Future future) async {
+  Future<void> addSearchListData(Future<SearchList?> future) async {
     final data = await future;
     state = AsyncValue.data(state.value!.copyWith(
       searchList: [
         ...state.value!.searchList,
-        ...data,
+        if (data != null) data,
       ],
     ));
   }
@@ -52,7 +33,6 @@ class YtSearchStateNotifier extends _$YtSearchStateNotifier {
         searchQuery: value,
         videoSearchList: [],
         searchList: [],
-        relatedVideo: [],
       ),
     );
   }
@@ -62,7 +42,6 @@ class YtSearchStateNotifier extends _$YtSearchStateNotifier {
     return YtSearchModelState(
       videoSearchList: [],
       searchList: [],
-      relatedVideo: [],
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wanderer/src/features/home/view/home.dart';
 import 'package:wanderer/src/features/player/view/player_maximized_view.dart';
-import 'package:wanderer/src/features/youtube/view/yt_content_view.dart';
+import 'package:wanderer/src/features/youtube/view/yt_browse_view.dart';
 
 import '../features/dashboard/view/dashboard_view.dart';
 
@@ -54,7 +54,7 @@ GoRouter goRouter = GoRouter(
               path: Routes.youtube.path,
               name: Routes.youtube.name,
               builder: (context, state) {
-                return YtContentView(
+                return YtBrowseView(
                   key: state.pageKey,
                 );
               },
@@ -66,29 +66,6 @@ GoRouter goRouter = GoRouter(
     GoRoute(
       path: Routes.playerMax.path,
       name: Routes.playerMax.name,
-      /*  pageBuilder: (context, state) {
-        return CustomTransitionPage<void>(
-          key: state.pageKey,
-          child: const PlayerMaximizedView(),
-          transitionDuration: const Duration(milliseconds: 300),
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) {
-            return ClipRect(
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0.0, 2.0),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              ),
-            );
-          },
-        );
-      }, */
       builder: (context, state) => const PlayerMaximizedView(),
     ),
   ],

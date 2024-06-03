@@ -11,9 +11,14 @@ class Home extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Home',
-          style: Theme.of(context).textTheme.headlineLarge,
+        Row(
+          children: [
+            const Icon(Icons.home_outlined),
+            Text(
+              'Home',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+          ],
         ),
         const SizedBox(
           height: 5,

@@ -58,6 +58,19 @@ Future<VideoSearchList> ytVideoQuery(
       await ref.watch(ytXplodeProvider).search.search(searchQuery);
   ref
       .read(ytSearchStateNotifierProvider.notifier)
-      .updateVideoSearchListData(suggestion);
+      .addVideoSearchListData(Future<VideoSearchList>.value(suggestion));
   return suggestion;
+}
+
+@riverpod
+Future<SearchList> ytContentQuery(
+    YtContentQueryRef ref, String searchQuery) async {
+  final SearchList result =
+      await ref.watch(ytXplodeProvider).search.searchContent(searchQuery);
+
+  ref
+      .read(ytSearchStateNotifierProvider.notifier)
+      .addSearchListData(Future<SearchList>.value(result));
+
+  return result;
 }

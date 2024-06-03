@@ -5,13 +5,12 @@ class YtSearchModelState {
   final Video? selectedVideo;
   final List<Video> videoSearchList;
   final List<SearchList> searchList;
-  final List<Video> relatedVideo;
+
   YtSearchModelState({
     this.searchQuery,
     this.selectedVideo,
     required this.videoSearchList,
     required this.searchList,
-    required this.relatedVideo,
   });
 
   YtSearchModelState copyWith({
@@ -26,7 +25,6 @@ class YtSearchModelState {
       selectedVideo: selectedVideo ?? this.selectedVideo,
       videoSearchList: videoSearchList ?? this.videoSearchList,
       searchList: searchList ?? this.searchList,
-      relatedVideo: relatedVideo ?? this.relatedVideo,
     );
   }
 }
